@@ -325,7 +325,7 @@ function displayQuestion() {
         questionHTML += `<li><button class="option-button" data-index="${index}" onclick="checkAnswer('${option.charAt(0)}')">${option}</li>`;
     });
     questionHTML += `</ul>`;
-    document.getElementById("question-area").innerHTML = questionHTML; // Ensure previous content is cleared
+    document.getElementById("question-area").innerHTML = questionHTML;
 
     const buttons = document.querySelectorAll(".option-button");
     buttons.forEach(button => button.classList.add("option-button-style"));
@@ -347,11 +347,10 @@ function checkAnswer(selectedAnswer) {
 
     if (selectedAnswer === correctAnswer) {
         score++;
-        const jsConfetti = new JSConfetti();
-        jsConfetti.addConfetti({
-            emojis: ['📖', '🎈', '✅'],
-            emojiSize: 60,
-            confettiNumber: 150
+        confetti({
+            particleCount: 100,
+            spread: 170,
+            origin: { y: 0.59 }
         });
     }
     document.getElementById("next-button").style.display = "block";
@@ -436,56 +435,4 @@ function signIn() {
     } else {
         alert("Invalid username or password.");
     }
-}
-
-function fireworks() {
-    const canvas = document.createElement('canvas');
-    canvas.width = 200;
-    canvas.height = 200;
-    canvas.style.position = 'absolute';
-    canvas.style.top = '50%';
-    canvas.style.left = '50%';
-    canvas.style.transform = 'translate(-50%, -50%)';
-    document.body.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-
-    const numFireworks = 5;
-    const fireworks = [];
-
-    for (let i = 0; i < numFireworks; i++) {
-        fireworks.push({
-            x: canvas.width / 2,
-            y: canvas.height,
-            vx: (Math.random() - 0.5) * 10,
-            vy: -20 - Math.random() * 10,
-            color: `hsl(${Math.random() * 360}, 100%, 50%)`
-        });
-    }
-
-    function drawFirework(firework) {
-        ctx.beginPath();
-        ctx.arc(firework.x, firework.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = firework.color;
-        ctx.fill();
-    }
-
-    function updateFireworks() {
-        fireworks.forEach(firework => {
-            firework.x += firework.vx;
-            firework.y += firework.vy;
-            firework.vy += 0.5;
-            drawFirework(firework);
-        });
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        updateFireworks();
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-    setTimeout(() => {
-        document.body.removeChild(canvas);
-    }, 2000);
 }
