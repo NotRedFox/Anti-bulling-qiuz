@@ -7,129 +7,297 @@ const allQuestions = [
     // Cyberbullying
     {
         question: "What is cyberbullying?",
-        answer: "online harassment"
+        options: [
+            "A) Physical harm",
+            "B) Online harassment",
+            "C) Ignoring someone",
+            "D) Helping someone"
+        ],
+        answer: "B"
     },
     {
         question: "Which of these is an example of cyberbullying?",
-        answer: "sharing someone's personal information without their consent"
+        options: [
+            "A) Sharing someone's personal information without their consent",
+            "B) Helping someone with their homework",
+            "C) Having a friendly conversation online",
+            "D) Complimenting someone's appearance"
+        ],
+        answer: "A"
     },
     {
         question: "What should you do if you receive a cyberbullying message?",
-        answer: "save the message and report it to a trusted adult"
+        options: [
+            "A) Respond angrily",
+            "B) Save the message and report it to a trusted adult",
+            "C) Ignore it and hope it goes away",
+            "D) Post the message on your own social media"
+        ],
+        answer: "B"
     },
 
     // Physical Bullying
     {
         question: "What is physical bullying?",
-        answer: "hitting, kicking, or pushing"
+        options: [
+            "A) Hitting, kicking, or pushing",
+            "B) Spreading rumors",
+            "C) Name-calling",
+            "D) Ignoring someone"
+        ],
+        answer: "A"
     },
     {
         question: "Which of these is NOT an example of physical bullying?",
-        answer: "giving someone a hug"
+        options: [
+            "A) Giving someone a hug",
+            "B) Shoving someone",
+            "C) Punching someone",
+            "D) Tripping someone"
+        ],
+        answer: "A"
     },
 
     // Verbal Bullying
     {
         question: "What is verbal bullying?",
-        answer: "name-calling or insults"
+        options: [
+            "A) Name-calling or insults",
+            "B) Physical harm",
+            "C) Spreading rumors",
+            "D) Social exclusion"
+        ],
+        answer: "A"
     },
     {
         question: "Which of these is an example of verbal bullying?",
-        answer: "teasing someone relentlessly"
+        options: [
+            "A) Teasing someone relentlessly",
+            "B) Offering a helping hand",
+            "C) Having a friendly chat",
+            "D) Giving a compliment"
+        ],
+        answer: "A"
     },
 
     // Relational Bullying
     {
         question: "What is relational bullying?",
-        answer: "damaging someone's reputation"
+        options: [
+            "A) Damaging someone's reputation",
+            "B) Physical violence",
+            "C) Cyberbullying",
+            "D) Verbal abuse"
+        ],
+        answer: "A"
     },
     {
         question: "Which of these is an example of relational bullying?",
-        answer: "spreading rumors to damage someone's friendships"
+        options: [
+            "A) Spreading rumors to damage someone's friendships",
+            "B) Giving someone a gift",
+            "C) Offering support to a friend",
+            "D) Including someone in a group activity"
+        ],
+        answer: "A"
     },
 
     // Bystander Intervention
     {
         question: "What is the best way to respond to bullying?",
-        answer: "tell a trusted adult"
+        options: [
+            "A) Fight back",
+            "B) Ignore it",
+            "C) Tell a trusted adult",
+            "D) Join in"
+        ],
+        answer: "C"
     },
     {
         question: "What should you do if you see someone being bullied?",
-        answer: "report it to a trusted adult"
+        options: [
+            "A) Report it to a trusted adult",
+            "B) Do nothing",
+            "C) Join in the bullying",
+            "D) Ignore the situation"
+        ],
+        answer: "A"
     },
     {
         question: "How can you help someone who is being bullied?",
-        answer: "offer support and encouragement"
+        options: [
+            "A) Offer support and encouragement",
+            "B) Ignore the situation",
+            "C) Join in the bullying",
+            "D) Tell the bully to stop"
+        ],
+        answer: "A"
     },
 
     // Effects of Bullying
     {
         question: "What is a common sign of someone being bullied?",
-        answer: "unexplained injuries or belongings"
+        options: [
+            "A) Increased confidence",
+            "B) Improved grades",
+            "C) Unexplained injuries or belongings",
+            "D) More social interaction"
+        ],
+        answer: "C"
     },
     {
         question: "What are some potential long-term effects of bullying?",
-        answer: "anxiety, depression, and low self-esteem"
+        options: [
+            "A) Anxiety, depression, and low self-esteem",
+            "B) Improved social skills",
+            "C) Increased academic achievement",
+            "D) Enhanced confidence"
+        ],
+        answer: "A"
     },
 
     // Defining Bullying
     {
         question: "What is bullying?",
-        answer: "repeated, aggressive behavior intended to harm"
+        options: [
+            "A) A single act of unkindness",
+            "B) Repeated, aggressive behavior intended to harm",
+            "C) A disagreement between friends",
+            "D) A one-time argument"
+        ],
+        answer: "B"
     },
     {
         question: "Bullying involves:",
-        answer: "an imbalance of power"
+        options: [
+            "A) An imbalance of power",
+            "B) Equal power dynamics",
+            "C) Mutual respect",
+            "D) Friendly teasing"
+        ],
+        answer: "A"
     },
 
     // Additional Questions
     {
         question: "What is a safe way to report bullying?",
-        answer: "tell a trusted adult, such as a teacher, parent, or counselor"
+        options: [
+            "A) Tell a trusted adult, such as a teacher, parent, or counselor",
+            "B) Post about it on social media",
+            "C) Confront the bully directly",
+            "D) Ignore the situation"
+        ],
+        answer: "A"
     },
     {
         question: "Why is it important to report bullying?",
-        answer: "to protect yourself and others"
+        options: [
+            "A) To protect yourself and others",
+            "B) To get revenge on the bully",
+            "C) To make the bully feel bad",
+            "D) To gain popularity"
+        ],
+        answer: "A"
     },
     {
         question: "What is the role of a bystander in bullying?",
-        answer: "to intervene and help the victim"
+        options: [
+            "A) To intervene and help the victim",
+            "B) To ignore the situation",
+            "C) To join in the bullying",
+            "D) To encourage the bully"
+        ],
+        answer: "A"
     },
     {
         question: "What are some positive ways to deal with conflict?",
-        answer: "communication and compromise"
+        options: [
+            "A) Communication and compromise",
+            "B) Physical aggression",
+            "C) Passive aggression",
+            "D) Avoidance"
+        ],
+        answer: "A"
     },
     {
         question: "How can schools prevent bullying?",
-        answer: "implement anti-bullying policies and programs"
+        options: [
+            "A) Implement anti-bullying policies and programs",
+            "B) Ignore the problem",
+            "C) Punish victims",
+            "D) Encourage bullying"
+        ],
+        answer: "A"
     },
     {
         question: "What is the difference between teasing and bullying?",
-        answer: "teasing is playful, bullying is intended to harm"
+        options: [
+            "A) Teasing is playful, bullying is intended to harm",
+            "B) There is no difference",
+            "C) Teasing is always bullying",
+            "D) Bullying is always teasing"
+        ],
+        answer: "A"
     },
     {
         question: "What is the impact of bullying on mental health?",
-        answer: "it can lead to anxiety, depression, and low self-esteem"
+        options: [
+            "A) It can lead to anxiety, depression, and low self-esteem",
+            "B) It improves mental health",
+            "C) It has no impact on mental health",
+            "D) It increases self-confidence"
+        ],
+        answer: "A"
     },
     {
         question: "What is the impact of bullying on academic performance?",
-        answer: "it can negatively affect academic performance"
+        options: [
+            "A) It can negatively affect academic performance",
+            "B) It improves academic performance",
+            "C) It has no impact on academic performance",
+            "D) It increases academic achievement"
+        ],
+        answer: "A"
     },
     {
         question: "What is the role of parents in preventing bullying?",
-        answer: "to teach children about bullying prevention and response"
+        options: [
+            "A) To teach children about bullying prevention and response",
+            "B) To ignore the problem",
+            "C) To encourage their children to bully others",
+            "D) To punish victims"
+        ],
+        answer: "A"
     },
     {
         question: "What is the role of peers in preventing bullying?",
-        answer: "to support victims and stand up to bullies"
+        options: [
+            "A) To support victims and stand up to bullies",
+            "B) To ignore the situation",
+            "C) To join in the bullying",
+            "D) To encourage the bully"
+        ],
+        answer: "A"
     },
     {
         question: "What are some strategies for building resilience to bullying?",
-        answer: "developing self-esteem and confidence"
+        options: [
+            "A) Developing self-esteem and confidence",
+            "B) Isolating oneself",
+            "C) Avoiding social interaction",
+            "D) Ignoring the problem"
+        ],
+        answer: "A"
     },
     {
         question: "How can communities help prevent bullying?",
-        answer: "by promoting positive relationships and a culture of respect"
+        options: [
+            "A) By promoting positive relationships and a culture of respect",
+            "B) By ignoring the problem",
+            "C) By punishing victims",
+            "D) By encouraging bullying"
+        ],
+        answer: "A"
     }
 ];
 
@@ -154,19 +322,22 @@ function signIn() {
 function displayQuestion() {
     const question = questions[currentQuestion];
     let questionHTML = `<h2>${question.question}</h2>`;
-    questionHTML += `<input type="text" id="answer-input" placeholder="Enter your answer">`;
+    questionHTML += `<select id="answer-select" onchange="checkAnswer(this.value)">`;
+    question.options.forEach(option => {
+        questionHTML += `<option value="${option.charAt(0)}">${option}</option>`;
+    });
+    questionHTML += `</select>`;
     document.getElementById("question-area").innerHTML = questionHTML;
 }
 
-function checkAnswer() {
-    const userAnswer = document.getElementById("answer-input").value.trim().toLowerCase();
-    const correctAnswer = questions[currentQuestion].answer.toLowerCase();
-    const inputField = document.getElementById("answer-input");
+function checkAnswer(selectedAnswer) {
+    const correctAnswer = questions[currentQuestion].answer;
+    const selectElement = document.getElementById("answer-select");
 
-    inputField.disabled = true;
+    selectElement.disabled = true;
 
-    if (userAnswer === correctAnswer) {
-        inputField.classList.add("correct");
+    if (selectedAnswer === correctAnswer) {
+        selectElement.classList.add("correct");
         score++;
         confetti({
             particleCount: 100,
@@ -175,7 +346,7 @@ function checkAnswer() {
         });
         fireworks();
     } else {
-        inputField.classList.add("incorrect");
+        selectElement.classList.add("incorrect");
     }
     document.getElementById("next-button").style.display = "block";
 }
@@ -231,7 +402,6 @@ function displayLeaderboard() {
     document.getElementById("leaderboard").style.display = "block";
     document.getElementById("quiz-content").style.display = "none";
 }
-
 
 function generateQuiz() {
     questions = getRandomQuestions(10);
