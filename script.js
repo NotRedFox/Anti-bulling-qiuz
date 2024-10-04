@@ -305,18 +305,6 @@ const users = {
     "student2": "12345"
 };
 
-function signIn() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    if (users[username] === password) {
-        document.getElementById("login-form").style.display = "none";
-        document.getElementById("quiz-content").style.display = "block";
-        generateQuiz();
-    } else {
-        alert("Invalid username or password.");
-    }
-}
 
 function displayQuestion() {
     const question = questions[currentQuestion];
@@ -415,6 +403,18 @@ function displayLeaderboard() {
     document.getElementById("quiz-content").style.display = "none";
 }
 
+const classCode = "ABC123"; // Your class code
+
+function startQuiz() {
+    const enteredCode = document.getElementById("class-code-input").value.trim();
+    if (enteredCode === classCode) {
+        document.getElementById("class-code-form").style.display = "none";
+        document.getElementById("quiz-content").style.display = "block";
+        generateQuiz();
+    } else {
+        alert("Invalid class code.");
+    }
+}
 
 function generateQuiz() {
     questions = getRandomQuestions(10);
