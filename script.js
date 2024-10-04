@@ -1,4 +1,3 @@
-
 let currentQuestion = 0;
 let score = 0;
 let answeredQuestions = [];
@@ -321,32 +320,39 @@ function signIn() {
 
 function displayQuestion() {
     const question = questions[currentQuestion];
-    let questionHTML = `<h2>${question.question}</h2>`;
-    questionHTML += `<select id="answer-select" onchange="checkAnswer(this.value)">`;
-    question.options.forEach(option => {
-        questionHTML += `<option value="${option.charAt(0)}">${option}</option>`;
+    let questionHTML = `<h2>${question.question}</h2><ul>`;
+    question.options.forEach((option, index) => {
+        questionHTML += `<li><button class="option-button" data-index="${index}" onclick="checkAnswer('${option.charAt(0)}')">${option}</li>`;
     });
-    questionHTML += `</select>`;
-    document.getElementById("question-area").innerHTML = questionHTML;
+    questionHTML += `</ul>`;
+    document.getElementById("question-area").innerHTML = questionHTML; // Ensure previous content is cleared
+
+    const buttons = document.querySelectorAll(".option-button");
+    buttons.forEach(button => button.classList.add("option-button-style"));
 }
 
 function checkAnswer(selectedAnswer) {
     const correctAnswer = questions[currentQuestion].answer;
-    const selectElement = document.getElementById("answer-select");
+    const buttons = document.querySelectorAll(`#question-area button`);
 
-    selectElement.disabled = true;
+    buttons.forEach(button => {
+        button.classList.remove("correct", "incorrect");
+        const buttonAnswer = button.textContent.charAt(0);
+        if (buttonAnswer === correctAnswer) {
+            button.classList.add("correct");
+        } else if (buttonAnswer === selectedAnswer) {
+            button.classList.add("incorrect");
+        }
+    });
 
     if (selectedAnswer === correctAnswer) {
-        selectElement.classList.add("correct");
         score++;
-        confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 }
+        const jsConfetti = new JSConfetti();
+        jsConfetti.addConfetti({
+            emojis: ['📖', '🎈', '✅'],
+            emojiSize: 60,
+            confettiNumber: 150
         });
-        fireworks();
-    } else {
-        selectElement.classList.add("incorrect");
     }
     document.getElementById("next-button").style.display = "block";
 }
@@ -368,6 +374,7 @@ function getRandomQuestions(numQuestions) {
     return shuffledQuestions.slice(0, numQuestions);
 }
 
+// Leaderboard data (initialize outside displayLeaderboard)
 const leaderboard = [
     { name: "Alice", score: 8 },
     { name: "Bob", score: 5 },
@@ -388,13 +395,19 @@ function displayLeaderboard() {
     const leaderboardElement = document.getElementById("leaderboard");
     leaderboardElement.innerHTML = "<h2>Leaderboard</h2><ol>";
 
+    // Add the current user's score to the leaderboard
     leaderboard.push({ name: "You", score: score });
+
+    // Sort the leaderboard by score (descending order)
     leaderboard.sort((a, b) => b.score - a.score);
+
+    // Display the top 10 scores
     leaderboard.slice(0, 10).forEach(item => {
         leaderboardElement.innerHTML += `<li>${item.name}: ${item.score}</li>`;
     });
     leaderboardElement.innerHTML += "</ol>";
 
+    // Display user's rank and score below the leaderboard
     const yourScoreIndex = leaderboard.findIndex(item => item.name === "You");
     const rank = yourScoreIndex + 1;
     leaderboardElement.innerHTML += `<div id="your-score">Your Rank: ${rank} (${score}/${questions.length}) - You</div>`;
@@ -402,6 +415,7 @@ function displayLeaderboard() {
     document.getElementById("leaderboard").style.display = "block";
     document.getElementById("quiz-content").style.display = "none";
 }
+
 
 function generateQuiz() {
     questions = getRandomQuestions(10);
