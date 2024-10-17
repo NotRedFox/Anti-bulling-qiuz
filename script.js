@@ -1,6 +1,9 @@
 let currentQuestion = 0;
 let score = 0;
+let correctAnswers = 0; // Initialize correctAnswers variable
 let answeredQuestions = [];
+let selectedAnswer = null; // Initialize selectedAnswer variable
+
 
 const allQuestions = [
     // Cyberbullying
@@ -305,12 +308,24 @@ const users = {
     "student2": "12345"
 };
 
+function signIn() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if (users[username] === password) {
+        document.getElementById("login-form").style.display = "none";
+        document.getElementById("quiz-content").style.display = "block";
+        generateQuiz();
+    } else {
+        alert("Invalid username or password.");
+    }
+}
 
 function displayQuestion() {
     const question = questions[currentQuestion];
     let questionHTML = `<h2>${question.question}</h2><ul>`;
     question.options.forEach((option, index) => {
-        questionHTML += `<li><button class="option-button" data-index="${index}" onclick="checkAnswer('${option.charAt(0)}')">${option}</li>`;
+        questionHTML += `<li><button class="option-button" data-index="${index}" onclick="checkAnswer('${option.charAt(0)}')">${option}</button></li>`;
     });
     questionHTML += `</ul>`;
     document.getElementById("question-area").innerHTML = questionHTML;
@@ -319,22 +334,23 @@ function displayQuestion() {
     buttons.forEach(button => button.classList.add("option-button-style"));
 }
 
-function checkAnswer(selectedAnswer) {
-    const correctAnswer = questions[currentQuestion].answer;
+function checkAnswer(answer) {
+    selectedAnswer = answer;
+    const correctAnswer = allQuestions[currentQuestion].answer;
     const buttons = document.querySelectorAll(`#question-area button`);
-
+    buttons.forEach(button => button.disabled = true);
     buttons.forEach(button => {
         button.classList.remove("correct", "incorrect");
         const buttonAnswer = button.textContent.charAt(0);
         if (buttonAnswer === correctAnswer) {
             button.classList.add("correct");
-        } else if (buttonAnswer === selectedAnswer) {
+        } else if (buttonAnswer === answer) {
             button.classList.add("incorrect");
         }
     });
-
-    if (selectedAnswer === correctAnswer) {
+    if (answer === correctAnswer) {
         score++;
+        correctAnswers++;
         confetti({
             particleCount: 100,
             spread: 170,
@@ -342,6 +358,9 @@ function checkAnswer(selectedAnswer) {
         });
     }
     document.getElementById("next-button").style.display = "block";
+    answeredQuestions.push({ question: currentQuestion, correct: answer === correctAnswer });
+    updateProgressBar();
+    updateCounter();
 }
 
 function nextQuestion() {
@@ -349,11 +368,13 @@ function nextQuestion() {
     if (currentQuestion < questions.length) {
         displayQuestion();
         document.getElementById("next-button").style.display = "none";
+        selectedAnswer = null;
     } else {
         document.getElementById("question-area").innerHTML = `<h1>Quiz Completed! Your score is ${score} out of ${questions.length}</h1>`;
         document.getElementById("next-button").style.display = "none";
         document.getElementById("leaderboard-button").style.display = "block";
     }
+    updateCounter();
 }
 
 function getRandomQuestions(numQuestions) {
@@ -361,7 +382,6 @@ function getRandomQuestions(numQuestions) {
     return shuffledQuestions.slice(0, numQuestions);
 }
 
-// Leaderboard data (initialize outside displayLeaderboard)
 const leaderboard = [
     { name: "Alice", score: 8 },
     { name: "Bob", score: 5 },
@@ -382,19 +402,13 @@ function displayLeaderboard() {
     const leaderboardElement = document.getElementById("leaderboard");
     leaderboardElement.innerHTML = "<h2>Leaderboard</h2><ol>";
 
-    // Add the current user's score to the leaderboard
     leaderboard.push({ name: "You", score: score });
-
-    // Sort the leaderboard by score (descending order)
     leaderboard.sort((a, b) => b.score - a.score);
-
-    // Display the top 10 scores
     leaderboard.slice(0, 10).forEach(item => {
         leaderboardElement.innerHTML += `<li>${item.name}: ${item.score}</li>`;
     });
     leaderboardElement.innerHTML += "</ol>";
 
-    // Display user's rank and score below the leaderboard
     const yourScoreIndex = leaderboard.findIndex(item => item.name === "You");
     const rank = yourScoreIndex + 1;
     leaderboardElement.innerHTML += `<div id="your-score">Your Rank: ${rank} (${score}/${questions.length}) - You</div>`;
@@ -403,22 +417,10 @@ function displayLeaderboard() {
     document.getElementById("quiz-content").style.display = "none";
 }
 
-const classCode = "ABC123"; // Your class code
-
-function startQuiz() {
-    const enteredCode = document.getElementById("class-code-input").value.trim();
-    if (enteredCode === classCode) {
-        document.getElementById("class-code-form").style.display = "none";
-        document.getElementById("quiz-content").style.display = "block";
-        generateQuiz();
-    } else {
-        alert("Invalid class code.");
-    }
-}
-
 function generateQuiz() {
     questions = getRandomQuestions(10);
     displayQuestion();
+    updateCounter();
 }
 
 document.getElementById("next-button").addEventListener("click", nextQuestion);
@@ -431,8 +433,31 @@ function signIn() {
     if (users[username] === password) {
         document.getElementById("login-form").style.display = "none";
         document.getElementById("quiz-content").style.display = "block";
+        document.getElementById("next-button").style.display = "none";
         generateQuiz();
     } else {
         alert("Invalid username or password.");
     }
+}
+
+function updateCounter() {
+    document.getElementById("question-counter").innerHTML = `${currentQuestion + 1}/${questions.length} (${correctAnswers}/${currentQuestion + 1})`;
+}
+
+function updateProgressBar() {
+    const progressBar = document.getElementById("progress-bar");
+    progressBar.innerHTML = "";
+
+    answeredQuestions.forEach((question) => {
+        const segment = document.createElement("div");
+        segment.classList.add("progress-segment");
+        segment.style.width = `${100 / allQuestions.length}%`;
+
+        if (question.correct) {
+            segment.style.backgroundColor = "#4CAF50";
+        } else {
+            segment.style.backgroundColor = "#f44336";
+        }
+        progressBar.appendChild(segment);
+    });
 }
